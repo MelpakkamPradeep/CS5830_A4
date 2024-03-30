@@ -67,7 +67,7 @@ csv_links = [link.get('href') for link in soup.find_all('a') if link.get('href')
 
 # Step 3: Process random CSV files until n_locs filtered files are present in datadir
 filtered_files = 0
-while filtered_files < 1 and len(csv_links) > 0:
+while filtered_files < n_locs and len(csv_links) > 0:
     random_csv_link = random.choice(csv_links)
     fetch_command = f"curl -o {datadir}{random_csv_link} {base_url}{year}/{random_csv_link}"
     os.system(fetch_command)
