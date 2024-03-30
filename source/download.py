@@ -89,6 +89,9 @@ while filtered_files < 1 and len(csv_links) > 0:
             if daily_col in df.columns and monthly_col in df.columns:
                 filtered_cols.append(daily_col)
                 filtered_cols.append(monthly_col)
+                
+        # Remove rows with no values in the required columns
+        df.dropna(subset=filtered_cols, how='all', inplace=True)
         
         if len(filtered_cols) > 0:
             filtered_df = df[['DATE'] + filtered_cols]
