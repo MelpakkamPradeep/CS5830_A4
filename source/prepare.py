@@ -5,6 +5,7 @@ import os
 paramsdir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/params/"     
 base_url = "https://www.ncei.noaa.gov/data/local-climatological-data/access/"
 datadir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/data/" 
+resultsdir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/results/" 
 
 df_list = []
 
@@ -26,4 +27,4 @@ for file_name in os.listdir(datadir):
 list_of_dfs = [sublist for sublist_list in df_list for sublist in sublist_list]
 computed_averages = pd.DataFrame(list_of_dfs, columns=['Station', 'Month', 'CalcMonthlyMeanTemperature', 'CalcMonthlyMaximumTemperature', 'CalcMonthlyMinimumTemperature'])
 # Save the DataFrame to a CSV file
-computed_averages.to_csv(f'{datadir}computed_monthly_averages.csv', index=False)
+computed_averages.to_csv(f'{resultsdir}computed_monthly_averages.csv', index=False)

@@ -6,6 +6,7 @@ import os
 paramsdir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/params/"     
 base_url = "https://www.ncei.noaa.gov/data/local-climatological-data/access/"
 datadir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/data/"
+resultsdir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/results/"
 
 df_list = []
 
@@ -19,13 +20,15 @@ for file_name in os.listdir(datadir):
 			# Convert the column to float64
 			df[col] = pd.to_numeric(df[col], errors='coerce')
 		grouped = df.groupby(['DATE'], as_index=False)
-		grouped_df = grouped.apply(lambda x : x)
+		month = df['DATE'].values.tolist()
+		grouped_df = grouped.apply(lambda x : x, include_groups=False)
 		location = [file_name[9:-4]] * len(grouped_df.index)
 		grouped_df.insert(loc=0, column='station', value=location)
+		grouped_df.insert(loc=1, column='month', value=month)
 		df_list.append(grouped_df.values.tolist())
 		
 list_of_dfs = [sublist for sublist_list in df_list for sublist in sublist_list]
 computed_averages = pd.DataFrame(list_of_dfs, columns=['Station', 'Month', 'ActualMonthlyMeanTemperature', 'ActualMonthlyMaximumTemperature', 'ActualMonthlyMinimumTemperature'])
 computed_averages.dropna(subset=['ActualMonthlyMeanTemperature', 'ActualMonthlyMaximumTemperature', 'ActualMonthlyMinimumTemperature'], how='all', inplace=True)
 # Save the DataFrame to a CSV file
-computed_averages.to_csv(f'{datadir}actual_monthly_averages.csv', index=False)
+computed_averages.to_csv(f'{resultsdir}actual_monthly_averages.csv', index=False)

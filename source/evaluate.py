@@ -6,11 +6,20 @@ import os
 paramsdir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/params/"     
 base_url = "https://www.ncei.noaa.gov/data/local-climatological-data/access/"
 datadir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/data/"
+resultsdir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/results/"
 
-calc_df = pd.read_csv(f"{datadir}computed_monthly_averages.csv")
-act_df = pd.read_csv(f"{datadir}actual_monthly_averages.csv")
+calc_df = pd.read_csv(f"{resultsdir}computed_monthly_averages.csv")
+act_df = pd.read_csv(f"{resultsdir}actual_monthly_averages.csv")
 
 merged_df =  pd.merge(calc_df, act_df, on=['Station', 'Month'], how='inner')
-print(f"The R^2 score of the Monthly Mean Temperature is : {np.corrcoef(merged_df['CalcMonthlyMeanTemperature'].values, merged_df['ActualMonthlyMeanTemperature'].values)[0, 1] ** 2}")
-print(f"The R^2 score of the Monthly Maximum Temperature is :{np.corrcoef(merged_df['CalcMonthlyMaximumTemperature'].values, merged_df['ActualMonthlyMaximumTemperature'].values)[0, 1] ** 2}")
-print(f"The R^2 score of the Monthly Minimum Temperature is :{np.corrcoef(merged_df['CalcMonthlyMinimumTemperature'].values, merged_df['ActualMonthlyMinimumTemperature'].values)[0, 1] ** 2}")
+grouped = merged_df.groupby(['Station'])
+
+def find_r2_score(group):
+	r21 = np.corrcoef(group['CalcMonthlyMeanTemperature'].values, group['ActualMonthlyMeanTemperature'].values)[0, 1] ** 2
+	r22 = np.corrcoef(group['CalcMonthlyMaximumTemperature'].values, group['ActualMonthlyMaximumTemperature'].values)[0, 1] ** 2
+	r23 = np.corrcoef(group['CalcMonthlyMinimumTemperature'].values, group['ActualMonthlyMinimumTemperature'].values)[0, 1] ** 2
+	return pd.Series([r21, r22, r23], index=['R2_MonthlyMeanTemperature', 'R2_MonthlyMaximumTemperature', 'R2_MonthlyMinimumTemperature'])
+r2_scores = grouped.apply(find_r2_score, include_groups=False).reset_index() 
+
+r2_scores.to_csv(f'{resultsdir}computed_r2_scores.csv', index=False)
+
