@@ -76,4 +76,5 @@ def filter(csv_file_path):
 datadir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/data/" 
 for csv in os.listdir(datadir):
 	if csv.endswith('csv'):	
-		filter(f"{datadir}{csv}")
+		filter(f"{datadir}72546314966.csv")
+		break

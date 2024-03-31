@@ -7,9 +7,8 @@ base_url = "https://www.ncei.noaa.gov/data/local-climatological-data/access/"
 datadir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/data/" 
 
 df_list = []
-count = 0
+
 for file_name in os.listdir(datadir):
-	count += 1
 	if file_name.endswith('csv') and file_name.startswith('filtered'):
 		df = pd.read_csv(f'{datadir}{file_name}')
 		df = df[df.columns.drop(list(df.filter(regex='Monthly')))]
