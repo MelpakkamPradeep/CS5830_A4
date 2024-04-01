@@ -38,7 +38,7 @@ def is_file_valid(file_path):
     
     for daily_col, monthly_col in pairs:
         if daily_col in df.columns and monthly_col in df.columns:
-            if not df[daily_col].notna().any() and not df[monthly_col].notna().any():
+            if not df[daily_col].notna().any() or not df[monthly_col].notna().any():
                 return False
     
     return True
@@ -54,6 +54,8 @@ datadir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/data/"
 params = read_params_from_yaml(f"{paramsdir}params.yaml")
 year = params['ncei']['year']
 n_locs = params['ncei']['n_locs']
+
+os.makedirs(datadir)
 
 # Step 1: Fetch the page containing the location-wise datasets
 html_file = fetch_html_page(base_url, year, datadir)
@@ -106,6 +108,7 @@ while filtered_files < n_locs and len(csv_links) > 0:
             filtered_df.to_csv(filtered_file_path, index=False)
             
             filtered_files += 1
+            os.remove(csv_file_path)
             print(f"Filtered file created: {filtered_file_path}")
         else:
             os.remove(csv_file_path)

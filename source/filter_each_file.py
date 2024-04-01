@@ -23,8 +23,9 @@ def is_file_valid(file_path):
     
     for daily_col, monthly_col in pairs:
         if daily_col in df.columns and monthly_col in df.columns:
-            if not df[daily_col].notna().any() and not df[monthly_col].notna().any():
-                print(df[daily_col].notna().any(), df[monthly_col].notna().any())
+            print(df[daily_col].notna().any(), df[monthly_col].notna().any())
+            if not df[daily_col].notna().any() or not df[monthly_col].notna().any():
+                
                 return False
     
     return True
@@ -76,5 +77,5 @@ def filter(csv_file_path):
 datadir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/data/" 
 for csv in os.listdir(datadir):
 	if csv.endswith('csv'):	
-		filter(f"{datadir}72546314966.csv")
+		filter(f"{datadir}filtered_70383525628.csv")
 		break

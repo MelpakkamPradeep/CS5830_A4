@@ -1,0 +1,26 @@
+stages:
+  download:
+    cmd: python source/download.py
+    deps:
+    - params/params.yaml
+    outs:
+    - data/
+  process:
+    cmd: python source/process.py
+    deps:
+    - data/
+    outs:
+    - results/actual_monthly_averages.csv
+  prepare:
+    cmd: python source/prepare.py
+    deps:
+    - data/
+    outs:
+    - results/computed_monthly_averages.csv
+  evaluate:
+    cmd: python source/evaluate.py
+    deps:
+    - results/actual_monthly_averages.csv
+    - results/computed_monthly_averages.csv
+    outs:
+    - results/computed_r2_scores.csv
