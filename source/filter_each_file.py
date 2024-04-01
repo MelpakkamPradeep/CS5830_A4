@@ -74,8 +74,8 @@ def filter(csv_file_path):
         os.remove(csv_file_path)
         print(f"No valid columns found in {csv_file_path}. Deleted the file.")
 
-datadir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/data/" 
+datadir = "/home/melpradeep/Desktop/CS5830/Assignment_4/datad/" 
 for csv in os.listdir(datadir):
 	if csv.endswith('csv'):	
-		filter(f"{datadir}filtered_70383525628.csv")
+		filter(f"{datadir}filtered_72335013877.csv")
 		break

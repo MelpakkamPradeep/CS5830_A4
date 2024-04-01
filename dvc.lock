@@ -5,53 +5,53 @@ stages:
     deps:
     - path: params/params.yaml
       hash: md5
-      md5: 5c3b7715e94354fb56de810757ee85e8
+      md5: 75081ae2976adee40937315d59b91f8b
       size: 72
     outs:
     - path: data/
       hash: md5
-      md5: 2a736facc3783b5e7453c4cd19720b95.dir
-      size: 1995249
+      md5: dbab3b8f79cdb78c4562d3ee4e4377ad.dir
+      size: 1996809
       nfiles: 3
   process:
     cmd: python source/process.py
     deps:
     - path: data/
       hash: md5
-      md5: 2a736facc3783b5e7453c4cd19720b95.dir
-      size: 1995249
+      md5: dbab3b8f79cdb78c4562d3ee4e4377ad.dir
+      size: 1996809
       nfiles: 3
     outs:
     - path: results/actual_monthly_averages.csv
       hash: md5
-      md5: ee3b6693c121ab1196b675482d2f944b
-      size: 780
+      md5: 3b3251331747b9fa3cb64d2b079c7e9a
+      size: 782
   prepare:
     cmd: python source/prepare.py
     deps:
     - path: data/
       hash: md5
-      md5: 2a736facc3783b5e7453c4cd19720b95.dir
-      size: 1995249
+      md5: dbab3b8f79cdb78c4562d3ee4e4377ad.dir
+      size: 1996809
       nfiles: 3
     outs:
     - path: results/computed_monthly_averages.csv
       hash: md5
-      md5: 7193e68661b6bd5fed6402c19ce3efd2
-      size: 1582
+      md5: 1720e33601763cae7083e9a4fb85c58e
+      size: 1619
   evaluate:
     cmd: python source/evaluate.py
     deps:
     - path: results/actual_monthly_averages.csv
       hash: md5
-      md5: ee3b6693c121ab1196b675482d2f944b
-      size: 780
+      md5: 3b3251331747b9fa3cb64d2b079c7e9a
+      size: 782
     - path: results/computed_monthly_averages.csv
       hash: md5
-      md5: 7193e68661b6bd5fed6402c19ce3efd2
-      size: 1582
+      md5: 1720e33601763cae7083e9a4fb85c58e
+      size: 1619
     outs:
     - path: results/computed_r2_scores.csv
       hash: md5
-      md5: 5699d8236fb428d9a04d2f7aa2a4e9d6
-      size: 229
+      md5: bb9f8462859789f07e7bcc960f9fcaa2
+      size: 230

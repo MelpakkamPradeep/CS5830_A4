@@ -13,8 +13,6 @@ df_list = []
 for file_name in os.listdir(datadir):
 	if file_name.endswith('csv') and file_name.startswith('filtered'):
 		df = pd.read_csv(f'{datadir}{file_name}')
-		print(df)
-		break
 		df = df[df.columns.drop(list(df.filter(regex='Daily')))]
 
 		for col in df.columns:
