@@ -17,7 +17,7 @@ We use `git` to track `params`, `source` (contains the scripts) and the `dvc` ac
 
 ## Notes
 1. `dvc.yaml` contains the DAG of scripts for `dvc` to execute. All outputs are tracked by `dvc`.
-2. `params` contains `params.yaml`. It has 2 parameters: `year` to specify the year from which the NCEI files are retrieved, and `n_locs` which gives the required number of files.
+2. `params/` contains `params.yaml`. It has 2 parameters: `year` to specify the year from which the NCEI files are retrieved, and `n_locs` which gives the required number of files.
 3. Until the number of `csv` files in `data/` is `n_locs`, `download.py` keeps executing.
 4. `results/` shall contain 3 `csv` files: `computed_monthly_averages.csv` (output of `prepare.py`), `actual_monthly_averages.csv` (output of `process.py`) and `computed_r2_scores.csv` (output of `evaluate.py`)
 5. `source/` contains the scripts for the pipeline. The functionality is as follows:
