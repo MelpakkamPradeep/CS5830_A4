@@ -21,4 +21,7 @@ We use `git` to track `params`, `source` (contains the scripts) and the `dvc` ac
 3. Until the number of `csv` files in `data/` is `n_locs`, `download.py` keeps executing.
 4. `results/` shall contain 3 `csv` files: `computed_monthly_averages.csv` (output of `prepare.py`), `actual_monthly_averages.csv` (output of `process.py`) and `computed_r2_scores.csv` (output of `evaluate.py`)
 5. `source/` contains the scripts for the pipeline. The functionality is as follows:
-   - `evaluate.py` : 
+   - `download.py` : Downloads files from the NCEI Database, and checks if all fields are non-empty. If so, this is stored in `data/`, Else the file is deleted and a new one is downloaded. Proceeds till `n_loc` files are present in `data/`. The files are saved as `filtered_<file>.csv`.
+   - `process.py` : Obtains the monthly averages from the `csv` files in `data/` and saves them to `results/actual_monthly_averages.csv`.
+   - `prepare.py` : Computes the monthly averages from the daily data from the `csv` files in `data/` and saves them to `results/computed_monthly_averages.csv`.
+   - `evaluate.py` : Finds the $R^{2}$ score between `actual_monthly_averages.csv` and `computed_monthly_averages.csv`. This is saved to `results/computed_r2_scores.csv`, with stations as rows and the temperatures as columns, with the corresponding $R^{2}$ scores as values.
