@@ -48,12 +48,13 @@ def extract_month(date_str):
     return pd.to_datetime(date_str).strftime('%m')
 
 # Specify directories, URLs, and parameters
-paramsdir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/params/"     
+paramsdir = "params/"     
 base_url = "https://www.ncei.noaa.gov/data/local-climatological-data/access/"
-datadir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/data/" 
 params = read_params_from_yaml(f"{paramsdir}params.yaml")
 year = params['ncei']['year']
 n_locs = params['ncei']['n_locs']
+datadir = "data/"
+resultsdir = "results/"
 
 os.makedirs(datadir)
 

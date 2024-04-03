@@ -3,10 +3,10 @@ import numpy as np
 import os
 
 # Specify directories, URLs, and parameters
-paramsdir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/params/"     
+paramsdir = "params/"     
 base_url = "https://www.ncei.noaa.gov/data/local-climatological-data/access/"
-datadir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/data/"
-resultsdir = "/home/melpradeep/Desktop/CS5830/Assignment_4/CS5830_A4/results/"
+datadir = "data/"
+resultsdir = "results/"
 
 calc_df = pd.read_csv(f"{resultsdir}computed_monthly_averages.csv")
 act_df = pd.read_csv(f"{resultsdir}actual_monthly_averages.csv")

@@ -1,4 +1,6 @@
 ncei:
     year      :    2022
     n_locs    :    3
+    datadir   :    "/home/melpradeep/Desktop/CS5830/CS5830_A4/data/"
+    resultsdir:    "/home/melpradeep/Desktop/CS5830/CS5830_A4/results/"
     seed      :    5
